@@ -5,9 +5,7 @@
 package UI;
 
 import ComponenteElectronico.Sensor;
-import java.awt.Canvas;
-import java.awt.Frame;
-import java.awt.Graphics;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,16 +13,14 @@ import java.awt.event.MouseEvent;
  *
  * @author 01806
  */
-public class SensorUI extends Canvas {
-     Frame canvas;
-     ImageCanvas imagen;
-    public SensorUI(Sensor mi_sensor)
+public class SensorUI{
+  
+     ImageForCanvas imagen;
+    public SensorUI(Sensor mi_sensor,CanvasUI canvas,int x,int y,int w,int h)
     {
-    imagen = new ImageCanvas("Imagenes/sensor.jpg",10,10,100,100);
-    canvas = new Frame();
-    canvas.setSize(500,500);
-    canvas.add(this);
-    addMouseListener(
+    imagen = new ImageForCanvas("Imagenes/sensor.jpg",x,y,w,h);
+    canvas.addComponent(imagen);
+    canvas.addMouseListener(
     new MouseAdapter(){
         
     @Override
@@ -34,17 +30,8 @@ public class SensorUI extends Canvas {
     }
     
     });
-    canvas.setVisible(true);
+   
     }
     
-    public void cerrar()
-    {
-    canvas.dispose();
-    }
-    
-     @Override
-    public void paint(Graphics g)
-    {
-    g.drawImage(imagen.getImage(),10,10,100,100, this);
-    }
+   
 }

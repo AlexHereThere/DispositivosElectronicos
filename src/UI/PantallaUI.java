@@ -5,9 +5,6 @@
 package UI;
 
 import ComponenteElectronico.Pantalla;
-import java.awt.Canvas;
-import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,16 +12,13 @@ import java.awt.event.MouseEvent;
  *
  * @author 01806
  */
-public class PantallaUI extends Canvas {
-    Frame canvas;
-     ImageCanvas imagen;
-    public PantallaUI(Pantalla mi_pantalla)
+public class PantallaUI{
+     ImageForCanvas imagen;
+    public PantallaUI(Pantalla mi_pantalla,CanvasUI canvas,int x,int y,int w, int h)
     {
-    imagen = new ImageCanvas("Imagenes/pantalla.jpg",10,10,100,100);
-    canvas = new Frame();
-    canvas.setSize(500,500);
-    canvas.add(this);
-    addMouseListener(
+    imagen = new ImageForCanvas("Imagenes/pantalla.jpg",x,y,w,h);
+    canvas.addComponent(imagen);
+    canvas.addMouseListener(
     new MouseAdapter(){
         
     @Override
@@ -37,14 +31,4 @@ public class PantallaUI extends Canvas {
     canvas.setVisible(true);
     }
     
-    public void cerrar()
-    {
-    canvas.dispose();
-    }
-    
-     @Override
-    public void paint(Graphics g)
-    {
-    g.drawImage(imagen.getImage(),10,10,100,100,this);
-    }
 }

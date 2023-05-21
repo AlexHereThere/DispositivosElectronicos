@@ -5,9 +5,6 @@
 package UI;
 
 import DispositivoElectronicoDeConsumo.Smartphone;
-import java.awt.Canvas;
-import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,48 +12,28 @@ import java.awt.event.MouseEvent;
  *
  * @author 01806
  */
-public class SmartphoneUI extends Canvas {
-     Frame canvas;
-    ImageCanvas imagen_smartphone;
-    ImageCanvas imagen_microprocesador;
-    ImageCanvas imagen_sensor;
-    ImageCanvas imagen_pantalla;
-    public SmartphoneUI(Smartphone mi_smartphone)
+public class SmartphoneUI {
+    ImageForCanvas imagen_smartphone;
+    public SmartphoneUI(Smartphone mi_smartphone,CanvasUI canvas,int x,int y,int w,int h)
     {
-    imagen_smartphone = new ImageCanvas("Imagenes/smartphone.jpg",10,10,100,100);
-    imagen_microprocesador =  new ImageCanvas("Imagenes/microprocesador.jpg",100,10,100,100);
-    imagen_sensor = new ImageCanvas("Imagenes/sensor.jpg",200,10,100,100);
-    imagen_pantalla = new ImageCanvas("Imagenes/pantalla.jpg",300,10,100,100);
-    canvas = new Frame();
-    canvas.add(this);
-    canvas.setSize(500,500);
-    addMouseListener(
+     imagen_smartphone = new ImageForCanvas("Imagenes/smartphone.jpg",x,y,w,h);
+    MicroprocesadorUI imagen_microprocesador = new MicroprocesadorUI(
+            mi_smartphone.getCPU(),canvas,x+100,y,w,h);
+    SensorUI imagen_sensor = new SensorUI(mi_smartphone.getSensor(),canvas,x+200,y,w,h);
+    PantallaUI imagen_pantalla = new PantallaUI(mi_smartphone.getPantalla(),canvas,x+300,y,w,h);
+    canvas.addComponent(imagen_smartphone);
+    canvas.addMouseListener(
     new MouseAdapter(){
         
     @Override
     public void mousePressed(MouseEvent e)
     { 
     if(imagen_smartphone.getHitBox().contains(e.getPoint()))System.out.println(mi_smartphone); 
-    if(imagen_microprocesador.getHitBox().contains(e.getPoint()))System.out.println(mi_smartphone.getCPU());
-    if(imagen_sensor.getHitBox().contains(e.getPoint()))System.out.println(mi_smartphone.getSensor());
-     if(imagen_pantalla.getHitBox().contains(e.getPoint()))System.out.println(mi_smartphone.getPantalla());
     }
     
     });
-    canvas.setVisible(true);
+  
     }
     
-    public void cerrar()
-    {
-    canvas.dispose();
-    }
-    
-    @Override
-    public void paint(Graphics g)
-    {
-    g.drawImage(imagen_smartphone.getImage(),10,10,100,100,this);
-    g.drawImage(imagen_microprocesador.getImage(),100,10,100,100,this);
-    g.drawImage(imagen_sensor.getImage(),200,10,100,100,this);
-    g.drawImage(imagen_pantalla.getImage(), 300, 10,100,100, this);
-    }
+   
 }

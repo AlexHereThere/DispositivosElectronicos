@@ -6,27 +6,21 @@ package UI;
 
 
 import ComponenteElectronico.Microprocesador;
-import java.awt.Canvas;
-import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
 /**
- *
- * @author 01806
+ *modelo para el despliegue microprocesador 
+ * @author ACR
  */
-public class MicroprocesadorUI extends Canvas {
-    Frame canvas;
-    ImageCanvas imagen;
-    public MicroprocesadorUI(Microprocesador mi_microprocesador)
+public class MicroprocesadorUI {
+    ImageForCanvas imagen;
+    public MicroprocesadorUI(Microprocesador mi_microprocesador,CanvasUI canvas,int x,int y,int w, int h) 
     {
-    imagen = new ImageCanvas("Imagenes/microprocesador.jpg",10,10,100,100);
-    canvas = new Frame();
-    canvas.add(this);
-    canvas.setSize(500,500);
-    addMouseListener(
+    imagen = new ImageForCanvas("Imagenes/microprocesador.jpg",x,y,w,h);
+    canvas.addComponent(imagen);
+    canvas.addMouseListener(
     new MouseAdapter(){
         
     @Override
@@ -36,17 +30,6 @@ public class MicroprocesadorUI extends Canvas {
     }
     
     });
-    canvas.setVisible(true);
     }
-    
-    public void cerrar()
-    {
-    canvas.dispose();
-    }
-    
-    @Override
-    public void paint(Graphics g)
-    {
-    g.drawImage(imagen.getImage(),10,10,100,100,this);
-    }
+     
 }

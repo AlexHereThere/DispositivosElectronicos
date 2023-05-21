@@ -6,16 +6,11 @@ import ComponenteElectronico.Sensor;
 import DispositivoElectronicoDeConsumo.Computadora;
 import DispositivoElectronicoDeConsumo.Smartphone;
 import DispositivoElectronicoDeConsumo.Television;
+import UI.CanvasUI;
 import UI.ComputadoraUI;
-import UI.MicroprocesadorUI;
-import UI.PantallaUI;
-import UI.SensorUI;
 import UI.SmartphoneUI;
 import UI.TelevisionUI;
-import UI.TodoUI;
-import java.awt.Canvas;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.Frame;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,6 +34,9 @@ public class AppDemoHerencia {
       ArrayList<Smartphone> listaDeSmartphones = new ArrayList<>();
       ArrayList<Television> listaDeTVs = new ArrayList<>();
       Scanner sc = new Scanner(System.in);
+      Frame ventana = new Frame();
+      ventana.setSize(500, 500);
+      ventana.setTitle("Dispositivos Electronicos");
       
       //smartphones
       Microprocesador cpu1=new Microprocesador(null,560,2500,
@@ -83,6 +81,7 @@ public class AppDemoHerencia {
               "Nintendo","235-523GFRED","Danonino","CPU-to-you",76560);
        Computadora computadora1 = new Computadora(cpu3,5670,
                "Alien","25GFrD4","Duracell","GamerBoy",12000);
+       
       for(Smartphone smartphone:listaDeSmartphones)
       {
           System.out.println(smartphone);    
@@ -99,21 +98,14 @@ public class AppDemoHerencia {
 
 
     
-     MicroprocesadorUI M = new MicroprocesadorUI(cpu1);
-     PantallaUI P = new PantallaUI(pantalla1);
-     TelevisionUI T = new TelevisionUI(tele1);
-     SensorUI S = new SensorUI(sensor1);
-     ComputadoraUI C = new ComputadoraUI(computadora1);
-     SmartphoneUI SM = new SmartphoneUI(celular1);
-     TodoUI To = new TodoUI(tele1,computadora1,celular1);
+     CanvasUI canvas = new CanvasUI();
+     TelevisionUI T = new TelevisionUI(tele1,canvas,10,10,100,100);
+     ComputadoraUI C = new ComputadoraUI(computadora1,canvas,10,100,100,100);
+     SmartphoneUI S = new SmartphoneUI(celular2,canvas,10,200,100,100);
+     ventana.add(canvas);
+     ventana.setVisible(true);
      sc.nextLine();
-     M.cerrar();
-     P.cerrar();
-     T.cerrar();
-     S.cerrar();
-     C.cerrar();
-     SM.cerrar();
-     To.cerrar();
+     ventana.dispose();
     }
     
 }

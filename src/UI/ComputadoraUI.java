@@ -5,51 +5,32 @@
 package UI;
 
 import DispositivoElectronicoDeConsumo.Computadora;
-import java.awt.Canvas;
-import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
- * @author 01806
+ * modelo para el despliegue de computadora
+ * @author ACR
  */
-public class ComputadoraUI extends Canvas {
-     Frame canvas;
-    ImageCanvas imagen_computadora;
-    ImageCanvas imagen_microprocesador;
-    public ComputadoraUI(Computadora mi_computadora)
+public class ComputadoraUI{
+    
+    public ComputadoraUI(Computadora mi_computadora,CanvasUI canvas,int x,int y,int w,int h)
     {
-    imagen_computadora = new ImageCanvas("Imagenes/computadora.png",10,10,100,100);
-    imagen_microprocesador =  new ImageCanvas("Imagenes/microprocesador.jpg",100,10,100,100);
-    canvas = new Frame();
-    canvas.add(this);
-    canvas.setSize(500,500);
-    addMouseListener(
+    ImageForCanvas imagen_computadora = new ImageForCanvas("Imagenes/computadora.png",x,y,w,h);
+    MicroprocesadorUI imagen_microprocesador =  new MicroprocesadorUI(mi_computadora.getCPU(),
+            canvas,x+100,y,w,h);
+    canvas.addComponent(imagen_computadora);
+    canvas.addMouseListener(
     new MouseAdapter(){
         
     @Override
     public void mousePressed(MouseEvent e)
     { 
     if(imagen_computadora.getHitBox().contains(e.getPoint()))System.out.println(mi_computadora); 
-    if(imagen_microprocesador.getHitBox().contains(e.getPoint()))System.out.println(mi_computadora.getCPU()); 
     }
     
     });
     canvas.setVisible(true);
-    }
-    
-    public void cerrar()
-    {
-    canvas.dispose();
-    }
-    
-    @Override
-    public void paint(Graphics g)
-    {
-    g.drawImage(imagen_computadora.getImage(),10,10,100,100,this);
-    g.drawImage(imagen_microprocesador.getImage(),100,10,100,100,this);
     }
 }
 
